@@ -1,0 +1,22 @@
+.ProductList{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.ProductList > div {
+  position: relative;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #000;
+  padding: 0px 10px 20px 15px;
+}
+
+.ProductList > div > small{
+  position: absolute;
+  font-size: 10px;
+  margin-top: auto;
+  color: rgb(78, 77, 77);
+  bottom: 10px;
+}

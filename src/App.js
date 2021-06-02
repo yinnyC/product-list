@@ -1,25 +1,64 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
+import data, {uniqueCategories} from './data'
+import Inventory from './Inventory/Inventory'
+
+import CatagoryList from './CatagoryList/CategoryList'
+import ProductList from './ProductList/ProductList'
+import Header from './Header/Header'
 
 function App() {
+  const [category,setCategory] = useState(['All'])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header
+        key = "Productuify" 
+        titile="Productuify" 
+        productCount={ data.length } 
+        categoryCount={ uniqueCategories.length }
+      />
+      <CatagoryList 
+        category= { category }
+        onClick = { newCategory => {
+          if(newCategory !== 'All'){
+            if(category.includes('All')){
+              setCategory([newCategory])
+            } else {
+              if(category.includes(newCategory)){
+                const index = category.indexOf(newCategory)
+                setCategory(category.slice(index))
+              } else {
+                setCategory([...category,newCategory])
+              }
+            } 
+          } else {
+            setCategory(['All'])
+          }
+        } }
+      />
+      <ProductList 
+        category={ category }
+      />
+      <Inventory />
     </div>
   );
 }
 
 export default App;
+
+/*
+
+- div.App <- category
+  - Header
+  - CatagoryList (div.CategoryList)
+     - button
+     - button
+     - ...
+  - ProductList (div.ProductList)
+    - div
+      - h2
+      - p
+      - p
+      - small
+
+ */
