@@ -32,6 +32,6 @@
   margin-left: 10px;
 }
 
-button.selected{
+.CatagoryList button.selected{
   background-color: #254f50;
 }

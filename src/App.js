@@ -1,43 +1,43 @@
-import './App.css';
-import {useState} from 'react';
-import data, {uniqueCategories} from './data'
-import Inventory from './Inventory/Inventory'
+import React, { useState } from 'react';
+import data, { uniqueCategories } from './data';
+import Inventory from './Inventory/Inventory';
 
-import CatagoryList from './CatagoryList/CategoryList'
-import ProductList from './ProductList/ProductList'
-import Header from './Header/Header'
+import CatagoryList from './CatagoryList/CategoryList';
+import ProductList from './ProductList/ProductList';
+import Header from './Header/Header';
+
+import './App.css';
 
 function App() {
-  const [category,setCategory] = useState(['All'])
+  const [category, setCategory] = useState(['All']);
   return (
     <div className="App">
       <Header
-        key = "Productuify" 
-        titile="Productuify" 
-        productCount={ data.length } 
-        categoryCount={ uniqueCategories.length }
+        key="Productuify"
+        titile="Productuify"
+        productCount={data.length}
+        categoryCount={uniqueCategories.length}
       />
-      <CatagoryList 
-        category= { category }
-        onClick = { newCategory => {
-          if(newCategory !== 'All'){
-            if(category.includes('All')){
-              setCategory([newCategory])
+      <CatagoryList
+        category={category}
+        onClick={(newCategory) => {
+          if (newCategory !== 'All') {
+            if (category.includes('All')) {
+              setCategory([newCategory]);
+            } else if (category.includes(newCategory)) {
+              const index = category.indexOf(newCategory);
+              category.splice(index, 1);
+              setCategory([...category]);
             } else {
-              if(category.includes(newCategory)){
-                const index = category.indexOf(newCategory)
-                setCategory(category.slice(index))
-              } else {
-                setCategory([...category,newCategory])
-              }
-            } 
+              setCategory([...category, newCategory]);
+            }
           } else {
-            setCategory(['All'])
+            setCategory(['All']);
           }
-        } }
+        }}
       />
-      <ProductList 
-        category={ category }
+      <ProductList
+        category={category}
       />
       <Inventory />
     </div>
